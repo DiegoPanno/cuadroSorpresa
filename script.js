@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function borrarEnCanvas(x, y) {
         // Crear un "borrador" redondo
-        const tamañoBorrador = 50;
+        const tamañoBorrador = 120;
         ctx.globalCompositeOperation = 'destination-out';
         ctx.beginPath();
         ctx.arc(x, y, tamañoBorrador / 2, 0, Math.PI * 2, false);
