@@ -7,11 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
     canvas.width = container.clientWidth;
     canvas.height = container.clientHeight;
 
-    // Rellenar el canvas con un color sólido (negro)
-    ctx.fillStyle = '#000';
+    // Rellenar el canvas con un color sólido (puede ser cualquier color)
+    const colorCubierta = '#000'; // Cambia este valor al color que desees
+    ctx.fillStyle = colorCubierta;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Agregar el evento de mousemove para borrar
+    // Agregar eventos de mouse y touch para borrar
     canvas.addEventListener('mousemove', (e) => {
         const rect = canvas.getBoundingClientRect();
         const x = e.clientX - rect.left;
@@ -19,9 +20,17 @@ document.addEventListener('DOMContentLoaded', () => {
         borrarEnCanvas(x, y);
     });
 
+    canvas.addEventListener('touchmove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const touch = e.touches[0];
+        const x = touch.clientX - rect.left;
+        const y = touch.clientY - rect.top;
+        borrarEnCanvas(x, y);
+    });
+
     function borrarEnCanvas(x, y) {
         // Crear un "borrador" redondo
-        const tamañoBorrador = 90;
+        const tamañoBorrador = 50;
         ctx.globalCompositeOperation = 'destination-out';
         ctx.beginPath();
         ctx.arc(x, y, tamañoBorrador / 2, 0, Math.PI * 2, false);
